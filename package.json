@@ -1,0 +1,29 @@
+{
+  "name": "roguelife",
+  "version": "0.0.1",
+  "description": "Roguelike game by three buds",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "jest",
+    "build": "rollup -c",
+    "serve": "open public/index.html && rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertsapunarich/roguelife.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robertsapunarich/roguelife/issues"
+  },
+  "homepage": "https://github.com/robertsapunarich/roguelife#readme",
+  "dependencies": {
+    "rot-js": "^2.1.1"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "rollup": "^2.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0"
+  }
+}
