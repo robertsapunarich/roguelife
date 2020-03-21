@@ -13,6 +13,8 @@ export default class Game {
 
   player = null;
 
+  pedro = null;
+
   ananas = null;
 
   constructor({ el }) {
@@ -24,6 +26,7 @@ export default class Game {
     this._generateMap();
     const scheduler = new Scheduler.Simple();
     scheduler.add(this.player, true);
+    scheduler.add(this.pedro, true);
     this.engine = new Engine(scheduler);
     this.engine.start();
   }
@@ -41,8 +44,8 @@ export default class Game {
 
     this._generateBoxes(freeCells);
     this._drawWholeMap();
-    this._createActor(Player, freeCells);
-    this._createActor(Pedro, freeCells);
+    this.player = this._createActor(Player, freeCells);
+    this.pedro = this._createActor(Pedro, freeCells);
   }
 
   _generateBoxes(cells) {
