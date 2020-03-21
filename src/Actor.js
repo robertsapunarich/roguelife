@@ -13,6 +13,10 @@ export default class Actor {
     return `${x},${y}`;
   }
 
+  get position() {
+    return this._position;
+  }
+
   constructor({ game, position: { x, y }, char, color }) {
     this._game = game;
     this._position = { x, y };

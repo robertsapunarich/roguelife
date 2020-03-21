@@ -34,7 +34,7 @@ export default class Player extends Actor {
     const newY = y + diffY;
     const newKey = `${newX},${newY}`;
 
-    if (typeof this._game.map[newKey] === 'undefined') false;
+    if (typeof this._game.map[newKey] === 'undefined') return;
 
     const { _game, _key } = this;
     _game.display.draw(x, y, _game.map[_key]);
