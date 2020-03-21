@@ -1,5 +1,5 @@
+import Actor from './Actor';
 import { DIRS } from 'rot-js';
-import Game from './Game';
 
 const KeyMap = {
   38: 0,
@@ -12,35 +12,13 @@ const KeyMap = {
   36: 7
 };
 
-export default class Player {
+export default class Player extends Actor {
 
-  _game = null;
-
-  _position = { x: -1, y: -1 };
-
-  get _key() {
-    const { x, y } = this._position;
-    return `${x},${y}`;
+  constructor(args) {
+    super({ ...args, char: '@', color: '#ff0' });
   }
 
-  constructor({ game, position: { x, y } }) {
-    this._game = game;
-    this._position = { x, y };
-    this._draw();
-  }
-
-  _draw() {
-    const { x, y } = this._position;
-    this._game.display.draw(x, y, '@', '#ff0');
-  }
-
-  act() {
-    this._game.engine.lock();
-    window.addEventListener('keydown', this);
-  }
-
-  handleEvent(e) {
-    const code = e.keyCode;
+  onEvent(code) {
     if ([13, 32].includes(code)) {
       this._checkBox();
       return;
@@ -56,14 +34,12 @@ export default class Player {
     const newY = y + diffY;
     const newKey = `${newX},${newY}`;
 
-    if (typeof this._game.map[newKey] === 'undefined') return;
+    if (typeof this._game.map[newKey] === 'undefined') false;
 
     const { _game, _key } = this;
     _game.display.draw(x, y, _game.map[_key]);
     this._position = { x: newX, y: newY };
     this._draw();
-    window.removeEventListener('keydown', this);
-    _game.engine.unlock();
   }
 
   _checkBox() {
