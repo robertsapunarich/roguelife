@@ -1,5 +1,6 @@
 import { Display, Map, RNG, Scheduler, Engine } from "rot-js";
 import { times } from './utils';
+import Pedro from './Pedro';
 import Player from './Player';
 
 export default class Game {
@@ -40,7 +41,8 @@ export default class Game {
 
     this._generateBoxes(freeCells);
     this._drawWholeMap();
-    this._createPlayer(freeCells);
+    this._createActor(Player, freeCells);
+    this._createActor(Pedro, freeCells);
   }
 
   _generateBoxes(cells) {
@@ -64,12 +66,12 @@ export default class Game {
     })
   }
 
-  _createPlayer(cells) {
+  _createActor(what, cells) {
     const index = Math.floor(RNG.getUniform() * cells.length);
     const key = cells.splice(index, 1)[0];
     const parts = key.split(',');
     const x = parseInt(parts[0], 10);
     const y = parseInt(parts[1], 10);
-    this.player = new Player({ game: this, position: { x, y } });
+    return new what({ game: this, position: { x, y } });
   }
 }
