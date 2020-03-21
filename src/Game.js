@@ -12,6 +12,8 @@ export default class Game {
 
   player = null;
 
+  ananas = null;
+
   constructor({ el }) {
     this.display = new Display();
     el.appendChild(this.display.getContainer());
@@ -42,10 +44,14 @@ export default class Game {
   }
 
   _generateBoxes(cells) {
-    times(10, () => {
+    times(10, (i) => {
       const index = Math.floor(RNG.getUniform() * cells.length);
       const key = cells.splice(index, 1)[0];
       this.map[key] = '*';
+
+      if (!i) {
+        this.ananas = key;
+      }
     });
   }
 
