@@ -1,4 +1,5 @@
-import { Display, Map } from "rot-js";
+import { Display, Map, RNG } from "rot-js";
+import { times } from './utils';
 
 export default class Game {
 
@@ -11,16 +12,34 @@ export default class Game {
     el.appendChild(this.display.getContainer());
   }
 
-  generateMap() {
+  init() {
+    this._generateMap();
+  }
+
+  _generateMap() {
     const digger = new Map.Digger();
+    const freeCells = [];
     digger.create((x, y, value) => {
       if (!value) {
-        this.map[`${x},${y}`] = 'x';
+        const key = `${x},${y}`;
+        this.map[key] = '.';
+        freeCells.push(key);
       }
+    });
+
+    this._generateBoxes(freeCells);
+    this._drawWholeMap();
+  }
+
+  _generateBoxes(cells) {
+    times(10, () => {
+      const index = Math.floor(RNG.getUniform() * cells.length);
+      const key = cells.splice(index, 1)[0];
+      this.map[key] = '*';
     });
   }
 
-  drawWholeMap() {
+  _drawWholeMap() {
     Object.keys(this.map).forEach((key) => {
       const parts = key.split(',');
       const x = parseInt(parts[0], 10);
