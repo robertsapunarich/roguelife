@@ -1,4 +1,4 @@
-import { Display, Map, RNG } from "rot-js";
+import { Display, Map, RNG, Scheduler, Engine } from "rot-js";
 import { times } from './utils';
 import Player from './Player';
 
@@ -7,6 +7,8 @@ export default class Game {
   display = null;
 
   map = {};
+
+  engine = null;
 
   player = null;
 
@@ -17,6 +19,10 @@ export default class Game {
 
   init() {
     this._generateMap();
+    const scheduler = new Scheduler.Simple();
+    scheduler.add(this.player, true);
+    this.engine = new Engine(scheduler);
+    this.engine.start();
   }
 
   _generateMap() {
