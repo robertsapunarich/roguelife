@@ -1,11 +1,14 @@
 import { Display, Map, RNG } from "rot-js";
 import { times } from './utils';
+import Player from './Player';
 
 export default class Game {
 
   display = null;
 
   map = {};
+
+  player = null;
 
   constructor({ el }) {
     this.display = new Display();
@@ -29,6 +32,7 @@ export default class Game {
 
     this._generateBoxes(freeCells);
     this._drawWholeMap();
+    this._createPlayer(freeCells);
   }
 
   _generateBoxes(cells) {
@@ -46,5 +50,14 @@ export default class Game {
       const y = parseInt(parts[1], 10);
       this.display.draw(x, y, this.map[key]);
     })
+  }
+
+  _createPlayer(cells) {
+    const index = Math.floor(RNG.getUniform() * cells.length);
+    const key = cells.splice(index, 1)[0];
+    const parts = key.split(',');
+    const x = parseInt(parts[0], 10);
+    const y = parseInt(parts[1], 10);
+    this.player = new Player({ game: this, position: { x, y } });
   }
 }
