@@ -13,6 +13,7 @@ body {
   align-items: center;
   color: #f06449;
   font-family: 'VT323', monospace;
+  filter: brightness(1.5) contrast(2);
 
   -webkit-animation: screen-show 1s; /* Safari 4+ */
   -moz-animation:    screen-show 1s; /* Fx 5+ */
