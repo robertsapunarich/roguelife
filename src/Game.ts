@@ -1,29 +1,30 @@
-import { Display, Map, RNG, Scheduler, Engine } from "rot-js";
+import { Display, Map, RNG, Scheduler, Engine } from 'rot-js';
 import { times } from './utils';
 import Pedro from './Pedro';
 import Player from './Player';
+import Actor from './Actor';
 
 export default class Game {
 
-  display = null;
+  public display = null;
 
-  map = {};
+  public map = {};
 
-  engine = null;
+  public engine = null;
 
-  player = null;
+  public player = null;
 
-  pedro = null;
+  public pedro = null;
 
-  ananas = null;
+  public ananas = null;
 
   constructor({ el }) {
     this.display = new Display();
     el.appendChild(this.display.getContainer());
   }
 
-  init() {
-    this._generateMap();
+  public init(): void {
+    this.generateMap();
     const scheduler = new Scheduler.Simple();
     scheduler.add(this.player, true);
     scheduler.add(this.pedro, true);
@@ -31,8 +32,8 @@ export default class Game {
     this.engine.start();
   }
 
-  _generateMap() {
-    const digger = new Map.Digger();
+  private generateMap(): void {
+    const digger = new Map.Digger(400, 600);
     const freeCells = [];
     digger.create((x, y, value) => {
       if (!value) {
@@ -42,13 +43,13 @@ export default class Game {
       }
     });
 
-    this._generateBoxes(freeCells);
-    this._drawWholeMap();
-    this.player = this._createActor(Player, freeCells);
-    this.pedro = this._createActor(Pedro, freeCells);
+    this.generateBoxes(freeCells);
+    this.drawWholeMap();
+    this.player = this.createActor(Player, freeCells);
+    this.pedro = this.createActor(Pedro, freeCells);
   }
 
-  _generateBoxes(cells) {
+  private generateBoxes(cells): void {
     times(10, (i) => {
       const index = Math.floor(RNG.getUniform() * cells.length);
       const key = cells.splice(index, 1)[0];
@@ -60,7 +61,7 @@ export default class Game {
     });
   }
 
-  _drawWholeMap() {
+  private drawWholeMap(): void {
     Object.keys(this.map).forEach((key) => {
       const parts = key.split(',');
       const x = parseInt(parts[0], 10);
@@ -69,7 +70,7 @@ export default class Game {
     })
   }
 
-  _createActor(what, cells) {
+  private createActor(what, cells): Actor {
     const index = Math.floor(RNG.getUniform() * cells.length);
     const key = cells.splice(index, 1)[0];
     const parts = key.split(',');

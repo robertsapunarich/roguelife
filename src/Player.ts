@@ -18,37 +18,35 @@ export default class Player extends Actor {
     super({ ...args, char: '@', color: '#ff0' });
   }
 
-  onEvent(code) {
-    if ([13, 32].includes(code)) {
-      this._checkBox();
+  public onEvent(code: number | string): void {
+    if ([13, 32].includes(+code)) {
+      this.checkBox();
       return;
     }
 
-    const key = KeyMap[code];
+    if (!(code in KeyMap)) return;
 
-    if (typeof key === 'undefined') return;
-
-    const { x, y } = this._position;
-    const [ diffX, diffY ] = DIRS[8][key];
+    const { x, y } = this.position;
+    const [ diffX, diffY ] = DIRS[8][KeyMap[code]];
     const newX = x + diffX;
     const newY = y + diffY;
     const newKey = `${newX},${newY}`;
 
-    if (typeof this._game.map[newKey] === 'undefined') return;
+    if (!(newKey in this.game.map)) return;
 
-    const { _game, _key } = this;
-    _game.display.draw(x, y, _game.map[_key]);
-    this._position = { x: newX, y: newY };
-    this._draw();
+    const { game, key } = this;
+    game.display.draw(x, y, game.map[key]);
+    this.position = { x: newX, y: newY };
+    this.draw();
   }
 
-  _checkBox() {
-    const { _game, _key } = this;
-    if (_game.map[_key] !== '*') {
+  private checkBox(): void {
+    const { game, key } = this;
+    if (game.map[key] !== '*') {
       alert('There is no box here!');
-    } else if (_key === _game.ananas) {
+    } else if (key === game.ananas) {
       alert('Hooray! You found an ananas and won this game.');
-      _game.engine.lock();
+      game.engine.lock();
       window.removeEventListener('keydown', this);
     } else {
       alert('This box is empty...');
