@@ -5,7 +5,7 @@ import { Options } from 'rot-js/lib/fov/fov';
 export default class Pedro extends Actor {
 
   constructor(args) {
-    super({ ...args, char: 'P', color: 'red' });
+    super({ ...args, char: 'P', color: '#f06449' });
   }
 
   public act(): void {

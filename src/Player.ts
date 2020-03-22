@@ -15,7 +15,7 @@ const KeyMap = {
 export default class Player extends Actor {
 
   constructor(args) {
-    super({ ...args, char: '@', color: '#ff0' });
+    super({ ...args, char: '@', color: '#5bc3eb' });
   }
 
   public onEvent(code: number | string): void {

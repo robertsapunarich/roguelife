@@ -24,7 +24,7 @@ export default class Game {
 
   constructor({ el }) {
     const { width, height } = Game;
-    this.display = new Display({ width, height });
+    this.display = new Display({ width, height, bg: '#36382E' });
     el.appendChild(this.display.getContainer());
   }
 
@@ -74,7 +74,7 @@ export default class Game {
       const parts = key.split(',');
       const x = parseInt(parts[0], 10);
       const y = parseInt(parts[1], 10);
-      this.display.draw(x, y, this.map[key]);
+      this.display.draw(x, y, this.map[key], '#dadad9');
     })
   }
 
