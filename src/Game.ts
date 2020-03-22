@@ -6,6 +6,10 @@ import Actor from './Actor';
 
 export default class Game {
 
+  public static width = 80;
+
+  public static height = 40;
+
   public display = null;
 
   public map = {};
@@ -19,7 +23,8 @@ export default class Game {
   public ananas = null;
 
   constructor({ el }) {
-    this.display = new Display();
+    const { width, height } = Game;
+    this.display = new Display({ width, height });
     el.appendChild(this.display.getContainer());
   }
 
@@ -33,7 +38,8 @@ export default class Game {
   }
 
   private generateMap(): void {
-    const digger = new Map.Digger(400, 600);
+    const { width, height } = Game;
+    const digger = new Map.Digger(width, height);
     const freeCells = [];
     digger.create((x, y, value) => {
       if (!value) {
@@ -59,6 +65,8 @@ export default class Game {
         this.ananas = key;
       }
     });
+    const { map } = this;
+    console.log({ map })
   }
 
   private drawWholeMap(): void {
