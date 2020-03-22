@@ -13,10 +13,59 @@ body {
   align-items: center;
   color: #f06449;
   font-family: 'VT323', monospace;
+
+  -webkit-animation: screen-show 1s; /* Safari 4+ */
+  -moz-animation:    screen-show 1s; /* Fx 5+ */
+  -o-animation:      screen-show 1s; /* Opera 12+ */
+  animation:         screen-show 1s; /* IE 10+, Fx 29+ */
 }
 
 canvas {
   box-shadow: 1px 2px 3px rgba(0,0,0,.3);
   border-radius: 4px;
   margin: 0 auto;
+
+  -webkit-animation: screen-wobble .1s infinite; /* Safari 4+ */
+  -moz-animation:    screen-wobble .1s infinite; /* Fx 5+ */
+  -o-animation:      screen-wobble .1s infinite; /* Opera 12+ */
+  animation:         screen-wobble .1s infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes screen-show {
+  0%   { opacity: 0; }
+  30%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes screen-show {
+  0%   { opacity: 0; }
+  30%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+@-o-keyframes screen-show {
+  0%   { opacity: 0; }
+  30%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+@keyframes screen-show {
+  0%   { opacity: 0; }
+  30%  { opacity: .5; }
+  100% { opacity: 1; }
+}
+
+@-webkit-keyframes screen-wobble {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes screen-wobble {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes screen-wobble {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes screen-wobble {
+  0%   { filter: contrast(1.5) brightness(1.51); }
+  50%  { filter: contrast(1.51) brightness(1.5); }
+  100% { filter: contrast(1.5) brightness(1.51); }
 }
