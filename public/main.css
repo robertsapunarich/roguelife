@@ -13,6 +13,7 @@ body {
   align-items: center;
   color: #f06449;
   font-family: 'VT323', monospace;
+  margin-top: 0;
 
   -webkit-animation: screen-show 1s; /* Safari 4+ */
   -moz-animation:    screen-show 1s; /* Fx 5+ */
@@ -28,22 +29,22 @@ canvas {
 }
 
 @-webkit-keyframes screen-show {
-  0%   { opacity: 0; }
-  30%  { opacity: .5; }
-  100% { opacity: 1; }
+  0%   { opacity: 0; margin-top: 10px; }
+  30%  { opacity: .5; margin-top: 16px;}
+  100% { opacity: 1; margin-top: 0px; }
 }
 @-moz-keyframes screen-show {
-  0%   { opacity: 0; }
-  30%  { opacity: .5; }
-  100% { opacity: 1; }
+  0%   { opacity: 0; margin-top: 10px; }
+  30%  { opacity: .5; margin-top: 16px;}
+  100% { opacity: 1; margin-top: 0px; }
 }
 @-o-keyframes screen-show {
-  0%   { opacity: 0; }
-  30%  { opacity: .5; }
-  100% { opacity: 1; }
+  0%   { opacity: 0; margin-top: 10px; }
+  30%  { opacity: .5; margin-top: 16px;}
+  100% { opacity: 1; margin-top: 0px; }
 }
 @keyframes screen-show {
-  0%   { opacity: 0; }
-  30%  { opacity: .5; }
-  100% { opacity: 1; }
+  0%   { opacity: 0; margin-top: 10px; }
+  30%  { opacity: .5; margin-top: 16px;}
+  100% { opacity: 1; margin-top: 0px; }
 }
