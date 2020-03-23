@@ -1,2 +1,4 @@
-import Game from './TutorialGame';
-new Game({ el: document.body.querySelector('#game') });
+import TutorialGame from './TutorialGame';
+import Sandbox from './Sandbox';
+new TutorialGame({ el: document.body.querySelector('#game') });
+new Sandbox({ el: document.body.querySelector('#sandbox') });
