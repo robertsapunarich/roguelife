@@ -44,7 +44,7 @@ export default class Player extends Actor {
     const { game, key } = this;
     if (game.map[key] !== '*') {
       alert('There is no box here!');
-    } else if (key === game.ananas) {
+    } else if (key === game.items.ananas) {
       alert('Hooray! You found an ananas and won this game.');
       game.engine.lock();
       window.removeEventListener('keydown', this);

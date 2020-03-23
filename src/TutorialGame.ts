@@ -6,24 +6,13 @@ import Player from './Player';
 
 export default class TutorialGame extends Game {
 
-  public player = null;
-
-  public pedro = null;
-
   public ananas = null;
 
   constructor({ el }) {
     super({ el });
   }
 
-  public init(): void {
-    this.generateMap();
-    this.scheduler.add(this.player, true);
-    this.scheduler.add(this.pedro, true);
-    this.engine.start();
-  }
-
-  private generateMap(): void {
+  protected init(): { map: object; actors: object; items: object } {
     const { width, height } = Game;
     const digger = new Map.Digger(width, height, { dugPercentage: 1.0 });
     const freeCells = [];
@@ -36,9 +25,14 @@ export default class TutorialGame extends Game {
     });
 
     this.generateBoxes(freeCells);
-    this.drawWholeMap();
-    this.player = this.createActor(Player, freeCells);
-    this.pedro = this.createActor(Pedro, freeCells);
+    const player = this.createActor(Player, freeCells);
+    const pedro = this.createActor(Pedro, freeCells);
+
+    return {
+      map: this.map,
+      actors: { player, pedro },
+      items: { ananas: this.ananas }
+    };
   }
 
   private generateBoxes(cells): void {

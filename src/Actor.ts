@@ -18,7 +18,6 @@ export default class Actor {
     this.position = { x, y };
     this.char = char;
     this.color = color;
-    this.draw();
   }
 
   protected draw(): void {

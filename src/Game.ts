@@ -1,13 +1,17 @@
 import { Display, Scheduler, Engine, RNG } from 'rot-js';
 import Actor from './Actor';
 
-export default class Game {
+export default abstract class Game {
 
   public static width = 34;
 
   public static height = 21;
 
   public map = {};
+
+  public actors = {};
+
+  public items = {};
 
   public display = null;
 
@@ -28,7 +32,21 @@ export default class Game {
 
     this.scheduler = new Scheduler.Simple();
     this.engine = new Engine(this.scheduler);
+    const { map, actors, items } = this.init();
+    this.map = map;
+    this.drawWholeMap();
+    this.actors = actors;
+    const actorList = Object.values(actors);
+    actorList.forEach(a => {
+      this.scheduler.add(a, true);
+      a.draw();
+    });
+    this.items = items;
+
+    this.engine.start();
   }
+
+  protected abstract init(): { map: object; actors: object; items: object };
 
   protected drawWholeMap(): void {
     Object.keys(this.map).forEach((key) => {

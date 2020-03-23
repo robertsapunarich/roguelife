@@ -38,7 +38,7 @@ export default class Pedro extends Actor {
   }
 
   private generatePathfinder(): AStar {
-    const { x, y } = this.game.player.position;
+    const { x, y } = this.game.actors.player.position;
     const { map } = this.game;
     const options: Partial<Options> = { topology: 4 };
     return new AStar(x, y, (x, y) => `${x},${y}` in map, options);
