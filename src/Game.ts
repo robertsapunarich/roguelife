@@ -6,9 +6,9 @@ import Actor from './Actor';
 
 export default class Game {
 
-  public static width = 80;
+  public static width = 34;
 
-  public static height = 40;
+  public static height = 21;
 
   public display = null;
 
@@ -24,7 +24,13 @@ export default class Game {
 
   constructor({ el }) {
     const { width, height } = Game;
-    this.display = new Display({ width, height, bg: '#36382E' });
+    this.display = new Display({
+      width,
+      height,
+      bg: '#36382E',
+      fontSize: 24,
+      forceSquareRatio: true
+    });
     el.appendChild(this.display.getContainer());
   }
 
@@ -39,7 +45,7 @@ export default class Game {
 
   private generateMap(): void {
     const { width, height } = Game;
-    const digger = new Map.Digger(width, height);
+    const digger = new Map.Digger(width, height, { dugPercentage: 90 });
     const freeCells = [];
     digger.create((x, y, value) => {
       if (!value) {
