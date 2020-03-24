@@ -1,5 +1,6 @@
 import { Display, Scheduler, Engine, RNG } from 'rot-js';
 import Actor from './Actor';
+import { times } from './utils';
 
 export default abstract class Game {
 
@@ -49,12 +50,16 @@ export default abstract class Game {
   protected abstract init(): { map: object; actors: object; items: object };
 
   protected drawWholeMap(): void {
-    Object.keys(this.map).forEach((key) => {
+    const points = Object.keys(this.map).map((key) => {
       const parts = key.split(',');
       const x = parseInt(parts[0], 10);
       const y = parseInt(parts[1], 10);
+      return { x, y, key };
+    });
+
+    points.forEach(({ x, y, key }) => {
       this.display.draw(x, y, this.map[key], '#dadad9');
-    })
+    });
   }
 
   protected createActor(what, cells, index = -1): Actor {
@@ -64,5 +69,16 @@ export default abstract class Game {
     const x = parseInt(parts[0], 10);
     const y = parseInt(parts[1], 10);
     return new what({ game: this, position: { x, y } });
+  }
+
+  protected spacingFromFontSize(x: number): number {
+    return 0.05 + (134 * (10**5) - 0.05) / (1 + (x / 0.0000023)**1.02);
+  }
+
+  protected setFontSize(x: number): void {
+    this.display.setOptions({
+      fontSize: x,
+      spacing: this.spacingFromFontSize(x)
+    });
   }
 }
